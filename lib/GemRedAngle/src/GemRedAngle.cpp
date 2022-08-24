@@ -44,11 +44,12 @@
  ****/
 #include "GemRedAngle.h"
 
-enum lineType : byte {unknown , stop, angle, calibrate};
+enum msgType : byte {unknown , stop, angle, calibrate};
 
+// Return the nth ';'-terminated field. Field numbering is zero-based.
 String getField(String line, byte n) {
   unsigned int start = 0;
-  int end = 0;
+  int end = -1;
   for (byte i = 0; i <= n; i++) {
     start = end + 1;
     end = line.indexOf(";", start);
@@ -59,14 +60,16 @@ String getField(String line, byte n) {
   return line.substring(start, end);
 }
 
-lineType getType(String line) {
-  if (line.substring(0, 4).equals(GEMRED_MSG_ANGLE)) {
+// Return the message type of the passed message
+msgType getType(String theMsg) {
+  String theField = getField(theMsg, 0);
+  if (theField.equals(GEMRED_MSG_ANGLE)) {
     return angle;
   }
-  if (line.substring(0, 3).equals(GEMRED_MSG_STOP)) {
+  if (theField.equals(GEMRED_MSG_STOP)) {
     return stop;
   }
-  if (line.substring(0,4).equals(GEMRED_MSG_CAL)) {
+  if (theField.equals(GEMRED_MSG_CAL)) {
     return calibrate;
   }
   return unknown;

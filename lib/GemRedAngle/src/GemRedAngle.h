@@ -9,11 +9,16 @@
  * required. First, the TX signal, which is a 3.3V serial ASCII data stream at 9600 baud, needs to 
  * be attached to a pin that is the RX line for some concrete subclass of Stream, a HardwareSerial 
  * object like Serial1, for instance. And second, there needs to be a digital pin that can be used 
- * to turn the power to the GemRed on and off. There are lots of ways to accomplish this, for 
- * example by building a crude Vcc-powered linear regulator made from a small general purpose NPN 
- * transistor and two resistors. That's needed because after a while when there's no change to the 
- * measured angle, the GemRed switches itself off automatically to conserve power. Turning the 
- * power off and then back on restarts things.
+ * to turn the power to the GemRed device on and off. There are lots of ways to accomplish this, 
+ * for example by building a crude Vcc-powered linear regulator made from a small general purpose 
+ * NPN transistor and two resistors controlled from a GPIO pin. That's needed because after a 
+ * while, when there's no change to the measured angle, the GemRed switches itself off 
+ * to conserve power. Turning the power off and then back on restarts things.
+ * 
+ * NB: Concrete classes derived from Stream may require class-specific initialization. For 
+ * example, HardwareSerial objects require initialization through their begin() member function. 
+ * This sort of initialization needs to be done before initializing GemRedAngle objects through 
+ * their begin() member function. Typically this is done in the sketch's setup() function.
  * 
  * =====
  *
