@@ -1,4 +1,7 @@
-# How to Hack the GemRed Mini Angle Gauge
+# How to Hack the 
+# GemRed Mini Angle Gauge
+## And Interface it to
+## An Arduino proMicro
 
 The GemRed angle gauge this library was designed for is the 82421 Mini Angle Gauge. I got mine 
 from [Amazon](https://amazon.com/dp/B078JNS7V6), but I'm sure they (or their clones) are available 
@@ -26,9 +29,15 @@ reinstalling the PCB and adding the jack looks like this:
 
 ![Photo of a GemRed Mini Angle Gauge PCB with hack installed](./GemRedMiniAngleGaugeBackNoCover.png "GemRed Hack Installed")
 
-Using a jack like this for the hack means you can still use the device as intended.
+Using a jack like this for the hack means you can still use the device as intended. Just unplug it, 
+pop in a battery and you're good to go.
 
  I used this super simple circuit to interface the GemRed device to a 5V Arduino proMicro:
 
 ![Schematic showing GemRed to Arduino interface circuit](./GemRedInterface.png "GemRed Hack Circuit")
 
+The 2N3904 acts as a crude linear voltage regulator to provide around 1.5V to the device. Internally 
+the GemRed device runs at 3.3V. It has a boost power supply to raise the voltage normally provided 
+by a AAA cell to what it wants. That means it isn't fussy about the exact input voltage. When it's 
+running it draws about 16mA. That's below the 20mA recommended current for a GPIO pin on a 
+proMicro, and well below the maximum 40mA.
