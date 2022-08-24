@@ -1,4 +1,4 @@
-#How to Hack the GemRed Mini Angle Gauge
+# How to Hack the GemRed Mini Angle Gauge
 
 The GemRed angle gauge this library was designed for is the 82421 Mini Angle Gauge. I got mine 
 from [Amazon](https://amazon.com/dp/B078JNS7V6), but I'm sure they (or their clones) are available 
@@ -24,7 +24,7 @@ Figure out how you'll get the wires to the outside world and then reassemble the
 to modify the case to let me install a 3.5mm Stereo Jack to lead the wires out. The result, after 
 reinstalling the PCB and adding the jack looks like this: 
 
-![Photo of a GemRed Mini Angle Gauge PCB with hack installed](./GemRedPCBHack.png "GemRed Hack Installed")
+![Photo of a GemRed Mini Angle Gauge PCB with hack installed](./GemRedMiniAngleGaugeBackNoCover.png "GemRed Hack Installed")
 
 Using a jack like this for the hack means you can still use the device as intended.
 
