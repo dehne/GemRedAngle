@@ -100,8 +100,11 @@ void loop() {
   if (angleGauge.run()) {
     float reading = angleGauge.getAngle();
     if (reading >= 0) {
-    Serial.print(F("angleGauge reading: "));
-      Serial.println(reading, 1);
+    Serial.print(F("Current angle measurement: "));
+      Serial.print(reading, 1);
+      Serial.print(F("°, measurement rate: "));
+      Serial.print(angleGauge.getRate());
+      Serial.println(F(" Hz."));
     } else {
       Serial.print(F("angleGauge reports an error: "));
       Serial.println(errorString[-((int16_t)reading) - 1]);

@@ -69,11 +69,12 @@
 
 #define GEMRED_OFF_MS       (1000UL)    // How long (ms) to hold GemRed power off to reset it.
 #define GEMRED_AWOL_MS      (3000UL)    // How long after hearing from GemRed we decide its AWOL
+#define GEMRED_FILTER_WIDTH (10.0)      // The width of the rate impulse filter (samples) 
 
 // GemRead message types (the 0th field of a message)
-#define GEMRED_MSG_STOP     "*9;"       // Stop message
-#define GEMRED_MSG_ANGLE    "*25;"      // Angle reading message
-#define GEMRED_MSG_CAL      "*30;"      // Calibrate message
+#define GEMRED_MSG_STOP     "*9"        // Stop message
+#define GEMRED_MSG_ANGLE    "*25"       // Angle reading message
+#define GEMRED_MSG_CAL      "*30"       // Calibrate message
 
 // For angle eading messages from the GemRed:
 #define GEMRED_ABSA_FIELD   (2)         // The number of the field containing the absolute angle
@@ -129,12 +130,26 @@ class GemRedAngle {
      ****/
     float getAngle();
 
+    /****
+     * 
+     * float getRate()
+     *    Return the current rate (Hz) at which aangle readings are coming from the device. The 
+     *    rate is an impulse-filtered rate since initialization. The rate upon the arrival of 
+     *    measurement m(k), r(k) = (w - 1) / w * r(k - 1) + 1 / w * m(k) where w is the filter
+     *    width. 
+     * 
+     ****/
+    float getRate();
+
   private:
     Stream* theDevice;
     uint8_t powerPin;
     bool powerOnHigh;
     float curAngle;
+    float curRate;
+    float filterWidth;
     String theLine;
     bool gotFirstMeasurement;
     unsigned long lastMillis;
+    unsigned long lastMsgMillis;
 };

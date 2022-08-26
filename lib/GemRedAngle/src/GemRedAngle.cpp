@@ -80,9 +80,11 @@ GemRedAngle::GemRedAngle(Stream &i, uint8_t p, bool a) {
   powerPin = p;
   powerOnHigh = a;
   curAngle = GEMRED_NOT_INIT;
+  curRate = 0.0;
+  filterWidth = 0;
   theLine = "";
   gotFirstMeasurement = false;
-  lastMillis = millis();
+  lastMillis = lastMsgMillis = millis();
 }
 
 void GemRedAngle::begin() {
@@ -125,7 +127,7 @@ bool GemRedAngle::run() {
         case unknown:                                 // unknown message type -- set up to return GEMRED_BAD_MSG
           #ifdef GEMRED_DEBUG
           Serial.print(F("GemRed unknown message type: "));
-          Serial.println(theLine);
+          Serial.println(getField(theLine, 0));
           #endif
           absa = GEMRED_BAD_MSG;
           break;
@@ -175,6 +177,16 @@ bool GemRedAngle::run() {
               Serial.println(theLine);
               #endif
               absa = GEMRED_BAD_QUADRANT;
+            }
+
+            // If we got a valid reading, update curRate
+            if (absa >= 0.0) {
+              float newRate = 1000.0 / (curMillis - lastMsgMillis);
+              if (filterWidth < GEMRED_FILTER_WIDTH) {
+                filterWidth += 1.0;
+              }
+              curRate = ((filterWidth - 1) / filterWidth) * curRate + (1 / filterWidth) * newRate;
+              lastMsgMillis = curMillis;
             }
           break;
                   
@@ -230,4 +242,8 @@ bool GemRedAngle::run() {
 
 float GemRedAngle::getAngle() {
   return curAngle;
+}
+
+float GemRedAngle::getRate() {
+  return curRate;
 }
