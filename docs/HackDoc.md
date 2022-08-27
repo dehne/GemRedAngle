@@ -1,7 +1,6 @@
 # How to Hack the 
 # GemRed Mini Angle Gauge
-## And Interface it to
-## An Arduino proMicro
+## (And Interface it to an Arduino proMicro)
 
 The GemRed angle gauge this library was designed for is the 82421 Mini Angle Gauge. I got mine 
 from [Amazon](https://amazon.com/dp/B078JNS7V6), but I'm sure they (or their clones) are available 
@@ -15,9 +14,9 @@ remove the PCB by unscrewing the seven (!) screws attaching it to the front part
 used two kinds of screw here: four JIS #0 cross-head (which are different from the ones securing the 
 back cover) in the PCB corners and three JIS #1 cross-head for the daughter board holding switches.
 
-Remove the PCB leaving the LCD display in the case &ndash; it's not attached but may stick 
+Remove the PCB, leaving the LCD display in the case &ndash; it's not attached but may stick 
 temporarily and then fall off, so be careful. Turn it over and solder the hack's wires to the pads 
-like this:
+of what's labeled "J3" and to the "+" contact of the battery holder like this:
 
 ![Photo of a GemRed Mini Angle Gauge PCB with hack wires](./GemRedPCBHack.png "GemRed Hack Wires")
 

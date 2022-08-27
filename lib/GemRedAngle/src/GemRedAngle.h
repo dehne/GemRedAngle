@@ -134,9 +134,9 @@ class GemRedAngle {
      * 
      * float getRate()
      *    Return the current rate (Hz) at which aangle readings are coming from the device. The 
-     *    rate is an impulse-filtered rate since initialization. The rate upon the arrival of 
-     *    measurement m(k), r(k) = (w - 1) / w * r(k - 1) + 1 / w * m(k) where w is the filter
-     *    width. 
+     *    rate is the impulse-filtered rate since initialization. The rate upon the arrival of 
+     *    measurement m(t), r(t) = (w - 1) / w * r(t - 1) + 1 / w * m(t) where w is the filter
+     *    width, GEMRED_FILTER_WIDTH. 
      * 
      ****/
     float getRate();
