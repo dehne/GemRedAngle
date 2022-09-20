@@ -9,10 +9,11 @@ GemRedAngle, two things are required. First, the TX signal, which is a 3.3V seri
 stream at 9600 baud, needs to be attached to a pin that is the RX line for some concrete subclass 
 of Stream, a HardwareSerial object like Serial1, for instance. And second, there needs to be a 
 digital pin that can be used to turn the power to the GemRed device on and off. There are lots of 
-ways to accomplish this, for example by building a crude Vcc-powered linear regulator made from a 
-small general purpose NPN transistor and two resistors controlled from a GPIO pin. That's needed 
-because after a while, when there's no change to the measured angle, the GemRed switches itself 
-off to conserve power. Turning the power off and then back on restarts things.
+ways to accomplish this, for example by building a crude linear regulator made from a small 
+general purpose NPN transistor and two resistors powered from a GPIO pin. (The GemRed draws 16mA; 
+easily within what a GPIO pin can provide.) That's needed because after a while, when there's no 
+change to the measured angle, the GemRed switches itself off to conserve power. Setting the GPIO 
+pin LOW and then HIGH restarts things.
 
 The library itself may be found in the repository's lib folder. The hack is more fully documented 
 in docs folder of the repository. There is a simple example of how to use GemRedAngle in the src 
